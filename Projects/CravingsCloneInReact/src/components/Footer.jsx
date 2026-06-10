@@ -46,7 +46,16 @@ function Footer(){
                 
             </div>
             <div className="w-full h-[1px] bg-white"></div>
-            <hr />
+            <div className="flex justify-between w-full pt-10">
+                <div>
+                    <p className="text-[15px]">© 2026 Cravings. All rights reserved.</p>
+                </div>
+                <div className="flex gap-8">
+                    <p className="text-[15px] hover:text-orange-700">Privacy Policy</p>
+                    <p className="text-[15px] hover:text-orange-700">Terms of Service</p>
+                    <p className="text-[15px] hover:text-orange-700">Site Map</p>
+                </div>
+            </div>
         </div>
         </div>
         </>
