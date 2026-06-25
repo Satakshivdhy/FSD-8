@@ -38,6 +38,15 @@ app.get("/", (req, res) => {
 //   res.json({ message: "Delete Successfull" });
 // });
 
+// default error handler
+
+app.use((err,req,res,next)=>{
+  const ErrMessage = err.message || "Internal Server Error";
+  const ErrStatusCode = err.ErrStatusCode || 500;
+
+  err.status(ErrStatusCode).json({message:"Internal Server Error"})
+})
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {

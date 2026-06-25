@@ -1,27 +1,39 @@
 import User from "../models/user.model.js";
 
-export const RegisterUser = async (req, res) => {
+export const RegisterUser = async (req, res,next) => {
   try {
+    console.log(0);
     const { fullName, email, password, phone, gender, dob } = req.body; //getting request from frontend
     // if input not filled |or| given any empty value
     if (!fullName || !email || !password || !phone || !gender || !dob) {
-      res.status(400).json({ message: "All Fields Required" });
+        const error = new error("All fields required");
+        error.statusCode = 400;
+        return next();
+    //   res.status(400).json({ message: "All Fields Required" });
       return;
     }
+    console.log(1);
     //if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      res.status(409).json({ message: "Email Already Registered" });
+        const error = new error("Email Already Registered");
+        error.statusCode = 409;
+        return next();
+    //   res.status(409).json({ message: "Email Already Registered" });
       return;
     }
-
+    console.log(3);
+    
     const photoUrl = `https://placehold.co/600x400?text=${fullName.charAt(0).toUpperCase()}`;
-
+    console.log(4);
+    
     const photo = {
       url: photoUrl,
       publicId: null,
     };
     // create new user
+    console.log(5);
+    
     const newUser = await User.create({
       fullName,
       email,
@@ -33,7 +45,8 @@ export const RegisterUser = async (req, res) => {
     });
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    next();
+    // res.status(500).json({ message: "Internal server error" });
   }
 };
 
