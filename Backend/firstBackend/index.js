@@ -42,9 +42,9 @@ app.get("/", (req, res) => {
 
 app.use((err,req,res,next)=>{
   const ErrMessage = err.message || "Internal Server Error";
-  const ErrStatusCode = err.ErrStatusCode || 500;
+  const ErrStatusCode = err.statusCode || 500;
 
-  err.status(ErrStatusCode).json({message:"Internal Server Error"})
+  res.status(ErrStatusCode).json({message:"Internal Server Error"})
 })
 
 const port = process.env.PORT || 5000;
