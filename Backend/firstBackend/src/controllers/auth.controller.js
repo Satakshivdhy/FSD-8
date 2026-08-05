@@ -77,7 +77,7 @@ export const LoginUser = async (req, res, next) => {
     // if (password !== existingUser.password) {
     //   const error = new Error("Incorrect Password");
     //   error.statusCode = 401;
-    //   return next(error);
+    //   return next(error);\
     // }
     console.log("d");
 
